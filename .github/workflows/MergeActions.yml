@@ -16,7 +16,7 @@ env:
 jobs:
   # imprimir nombre y rama si la rama es dev
   job-dev:
-    if: ${{ VAR_BRANCH == 'dev' }}
+    if: $VAR_BRANCH == 'dev'
 
     runs-on: self-hosted
 
