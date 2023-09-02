@@ -1,42 +1,42 @@
-name: mrg-jbs
+name: merge jobs
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: 
       - main
       - dev
     types: [opened, reopened, synchronize]
 
-  
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 env:
-  MY_REF_NAME: ${{ github.ref_name }} 
-  MY_ENV_REF_NAME2: ${{ github.ref_name }} 
+  VAR_BRANCH: ${{ github.ref_name }} 
+  VAR_DEBUG_vars: ${{ toJson(vars) }}
     
 jobs:
   # imprimir nombre y rama si la rama es dev
   job-dev:
-    if: ${{ github.ref_name == 'dev' }}
-    
+    if: ${{ VAR_BRANCH == 'dev' }}
+
     runs-on: self-hosted
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo "Datos de Salida Job 1:"
-          echo "rama: $MY_REF_NAME"
+          echo
+          echo "----------------------------"
+          echo "Datos de Salida Job: $GITHUB_JOB"
+          echo "----------------------------"
+          echo "rama: $VAR_BRANCH"
+          echo "nombre: ${{ vars.ALUMNO_REPO }}"
+          echo "----------------------------"
+          echo "-      Debug vars...       -" 
+          echo "vars: $VAR_DEBUG_vars"
+          echo "----------------------------"
+          echo "- Debug Enviroment vars... -" 
           echo "nombre: ${{ vars.ALUMNO }}"
-          echo "nombre: ${{ vars.ALUMNOS }}"
-          echo "nombre: $vars.ALUMNO"
-          echo "nombre: $vars.ALUMNOS"
 
   # imprimir email y rama si la rama es qa
   job-qa:
@@ -44,18 +44,22 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo "Datos de Salida Job 1:"
-          echo "rama: $MY_REF_NAME"
-          echo "nombre: ${{ vars.ALUMNO }}"
-          echo "nombre: ${{ vars.ALUMNOS }}"
-          echo "nombre: $vars.ALUMNO"
-          echo "nombre: $vars.ALUMNOS"
+          echo
+          echo "----------------------------"
+          echo "Datos de Salida Job: $GITHUB_JOB"
+          echo "----------------------------"
+          echo "rama: $VAR_BRANCH"
+          echo "email: ${{ vars.EMAIL_REPO }}"
+          echo "----------------------------"
+          echo "-      Debug vars...       -" 
+          echo "vars: $VAR_DEBUG_vars"
+          echo "----------------------------"
+          echo "- Debug Enviroment vars... -" 
+          echo "email: ${{ vars.EMAIL }}"
 
   # imprimir nombre y rama si la rama es prod
   job-prod:
@@ -67,29 +71,44 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script 3
+      - name: Run a multi-line script
         run: |
-          echo "Datos de Salida Job 1:"
-          echo "rama: ${{ github.ref_name }}"
-          echo ${{ vars.ALUMNO }}
-          echo ${{ vars.ALUMNOS }}
-          echo $vars.ALUMNO
-          echo $vars.ALUMNOS
+          echo
+          echo "----------------------------"
+          echo "Datos de Salida Job: $GITHUB_JOB"
+          echo "----------------------------"
+          echo "rama: $VAR_BRANCH"
+          echo "nombre: ${{ vars.ALUMNO_REPO }}"
+          echo "email: ${{ vars.EMAIL_REPO }}"
+          echo "----------------------------"
+          echo "-      Debug vars...       -" 
+          echo "vars: $VAR_DEBUG_vars"
+          echo "----------------------------"
+          echo "- Debug Enviroment vars... -" 
+          echo "nombre: ${{ vars.ALUMNO }}"
+          echo "email: ${{ vars.EMAIL }}"
 
 
   # hacer curl a la URL e imprimir el resultado junto con el nombre de la rama
   job-2:
     runs-on: self-hosted
 
+    env:
+      SECRET_URL: ${{ secrets.URL_REPO }} 
+
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script 4
+      - name: Run a multi-line script
         run: |
-          echo "Datos de Salida Job 2:"
-          echo "rama: ${{ github.ref_name }}"
-          curl $secrets.URL
+          echo
+          echo "----------------------------"
+          echo "Datos de Salida Job: $GITHUB_JOB"
+          echo "----------------------------"
+          echo "rama: $VAR_BRANCH"
+          echo "----------------------------"
+          curl "$SECRET_URL"
+          
 
 
