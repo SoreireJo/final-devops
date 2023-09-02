@@ -16,7 +16,7 @@ on:
 jobs:
   # imprimir nombre y rama si la rama es dev
   job-dev:
-    if: $env_var1 == 'dev'
+    if: ${{ vars.ENV_CONTEXT_VAR }} == 'dev'
     runs-on: self-hosted
 
     steps:
@@ -31,7 +31,7 @@ jobs:
 
   # imprimir email y rama si la rama es qa
   job-qa:
-    if: $env_var1 == 'qa'
+    if: ${{ vars.ENV_CONTEXT_VAR }} == 'qa'
     runs-on: self-hosted
 
     steps:
@@ -46,7 +46,7 @@ jobs:
 
   # imprimir nombre y rama si la rama es prod
   job-prod:
-    if: $env_var1 == 'prod'
+    if: ${{ vars.ENV_CONTEXT_VAR }} == 'prod'
     runs-on: self-hosted
 
     steps:
