@@ -1,7 +1,7 @@
 name: merge-actions
 
 on:
-  push:
+  pull_request:
     branches: 
       -main
       -dev
@@ -75,3 +75,5 @@ jobs:
         run: |
           echo "rama: $env_var"
           curl ${{ secrets.URL }}
+
+
