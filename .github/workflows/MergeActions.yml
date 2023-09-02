@@ -13,13 +13,12 @@ on:
   
 env:
   env_var1: ${{ vars.ENV_CONTEXT_VAR }}
-  env_runner1: "ubuntu-latest"
 
 jobs:
   # imprimir nombre y rama si la rama es dev
   job-dev:
     if: $env_var1 == 'dev'
-    runs-on: $env_runner1
+    runs-on: self-hosted
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -34,7 +33,7 @@ jobs:
   # imprimir email y rama si la rama es qa
   job-qa:
     if: $env_var1 == 'qa'
-    runs-on: $env_runner1
+    runs-on: self-hosted
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -49,7 +48,7 @@ jobs:
   # imprimir nombre y rama si la rama es prod
   job-prod:
     if: $env_var1 == 'prod'
-    runs-on: $env_runner1
+    runs-on: self-hosted
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -64,7 +63,7 @@ jobs:
 
   # hacer curl a la URL e imprimir el resultado junto con el nombre de la rama
   job-2:
-    runs-on: $env_runner1
+    runs-on: self-hosted
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -75,4 +74,5 @@ jobs:
         run: |
           echo "rama: $env_var1"
           curl ${{ secrets.URL }}
+
 
