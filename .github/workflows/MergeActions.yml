@@ -16,7 +16,7 @@ on:
 jobs:
   # imprimir nombre y rama si la rama es dev
   job-dev:
-    if: ${{ vars.ENV_CONTEXT_VAR }} == 'dev'
+    if: ${{ vars.GITHUB_REF_NAME }} == 'dev'
     runs-on: self-hosted
 
     steps:
@@ -26,12 +26,12 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script 1
         run: |
-          echo "rama: ${{ vars.ENV_CONTEXT_VAR }}"
+          echo "rama: ${{ vars.GITHUB_REF_NAME }}"
           echo "nombre: ${{ vars.ALUMNO }}"
 
   # imprimir email y rama si la rama es qa
   job-qa:
-    if: ${{ vars.ENV_CONTEXT_VAR }} == 'qa'
+    if: ${{ vars.GITHUB_REF_NAME }} == 'qa'
     runs-on: self-hosted
 
     steps:
@@ -41,12 +41,12 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script 2
         run: |
-          echo "rama: ${{ vars.ENV_CONTEXT_VAR }}"
+          echo "rama: ${{ vars.GITHUB_REF_NAME }}"
           echo "email: ${{ vars.EMAIL }}"
 
   # imprimir nombre y rama si la rama es prod
   job-prod:
-    if: ${{ vars.ENV_CONTEXT_VAR }} == 'prod'
+    if: ${{ vars.GITHUB_REF_NAME }} == 'prod'
     runs-on: self-hosted
 
     steps:
@@ -56,7 +56,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script 3
         run: |
-          echo "rama: ${{ vars.ENV_CONTEXT_VAR }}"
+          echo "rama: ${{ vars.GITHUB_REF_NAME }}"
           echo "nombre: ${{ vars.ALUMNO }}"
           echo "email: ${{ vars.EMAIL }}"
 
@@ -71,13 +71,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script 4
         run: |
-          echo "rama: ${{ vars.ENV_CONTEXT_VAR }}"
-          curl ${{ secrets.URL }}
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script 4
-        run: |
-          echo "rama: $env_var1"
+          echo "rama: ${{ vars.GITHUB_REF_NAME }}"
           curl ${{ secrets.URL }}
 
 
