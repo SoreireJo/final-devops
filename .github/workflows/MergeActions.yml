@@ -26,10 +26,10 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script for dev branch
+      - name: Run a multi-line script 1
         run: |
           echo "rama: $env_var"
-          echo "nombre: ${{ vars.NOMBRE }}"
+          echo "nombre: ${{ vars.ALUMNO }}"
 
   # imprimir email y rama si la rama es qa
   job-qa:
@@ -41,7 +41,7 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script for qa branch
+      - name: Run a multi-line script 2
         run: |
           echo "rama: $env_var"
           echo "email: ${{ vars.EMAIL }}"
@@ -56,11 +56,11 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script for prod branch
+      - name: Run a multi-line script 3
         run: |
           echo "rama: $env_var"
-          echo "nombre: ${{ vars.NOMBRE }}"
-	        echo "email: ${{ vars.EMAIL }}"
+          echo "nombre: ${{ vars.ALUMNO }}"
+          echo "email: ${{ vars.EMAIL }}"
 
   # hacer curl a la URL e imprimir el resultado junto con el nombre de la rama
   job-2:
@@ -71,7 +71,7 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script for dev's branch
+      - name: Run a multi-line script 4
         run: |
           echo "rama: $env_var"
           curl ${{ secrets.URL }}
