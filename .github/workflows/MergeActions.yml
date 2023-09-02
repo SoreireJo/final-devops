@@ -1,0 +1,77 @@
+name: merge-actions
+
+on:
+  push:
+    branches: 
+      -main
+      -dev
+      -qa
+      -prod
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  env_var: ${{ vars.ENV_CONTEXT_VAR }}
+  env_runner: "ubuntu-latest"
+
+jobs:
+  # imprimir nombre y rama si la rama es dev
+  job-dev:
+    if: $env_var == 'dev'
+    runs-on: $env_runner
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script for dev branch
+        run: |
+          echo "rama: $env_var"
+          echo "nombre: ${{ vars.NOMBRE }}"
+
+  # imprimir email y rama si la rama es qa
+  job-qa:
+    if: $env_var == 'qa'
+    runs-on: $env_runner
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script for qa branch
+        run: |
+          echo "rama: $env_var"
+          echo "email: ${{ vars.EMAIL }}"
+
+  # imprimir nombre y rama si la rama es prod
+  job-prod:
+    if: $env_var == 'prod'
+    runs-on: $env_runner
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script for prod branch
+        run: |
+          echo "rama: $env_var"
+          echo "nombre: ${{ vars.NOMBRE }}"
+	        echo "email: ${{ vars.EMAIL }}"
+
+  # hacer curl a la URL e imprimir el resultado junto con el nombre de la rama
+  job-2:
+    runs-on: $env_runner
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script for dev's branch
+        run: |
+          echo "rama: $env_var"
+          curl ${{ secrets.URL }}
