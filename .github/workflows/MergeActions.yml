@@ -12,11 +12,16 @@ on:
   
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  
+
+env:
+  MY_REF_NAME: ${{ github.ref_name }} 
+  MY_ENV_REF_NAME2: ${{ github.ref_name }} 
+    
 jobs:
   # imprimir nombre y rama si la rama es dev
   job-dev:
-    if: ${{ vars.GITHUB_REF_NAME }} == 'dev'
+    if: ${{ github.ref_name == 'dev' }}
+    
     runs-on: self-hosted
 
     steps:
@@ -24,14 +29,18 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script 1
+      - name: Run a multi-line script
         run: |
-          echo "rama: ${{ vars.GITHUB_REF_NAME }}"
+          echo "Datos de Salida Job 1:"
+          echo "rama: $MY_REF_NAME"
           echo "nombre: ${{ vars.ALUMNO }}"
+          echo "nombre: ${{ vars.ALUMNOS }}"
+          echo "nombre: $vars.ALUMNO"
+          echo "nombre: $vars.ALUMNOS"
 
   # imprimir email y rama si la rama es qa
   job-qa:
-    if: ${{ vars.GITHUB_REF_NAME }} == 'qa'
+    # if: ${{ github.ref_name == 'qa' }}
     runs-on: self-hosted
 
     steps:
@@ -39,14 +48,18 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script 2
+      - name: Run a multi-line script
         run: |
-          echo "rama: ${{ vars.GITHUB_REF_NAME }}"
-          echo "email: ${{ vars.EMAIL }}"
+          echo "Datos de Salida Job 1:"
+          echo "rama: $MY_REF_NAME"
+          echo "nombre: ${{ vars.ALUMNO }}"
+          echo "nombre: ${{ vars.ALUMNOS }}"
+          echo "nombre: $vars.ALUMNO"
+          echo "nombre: $vars.ALUMNOS"
 
   # imprimir nombre y rama si la rama es prod
   job-prod:
-    if: ${{ vars.GITHUB_REF_NAME }} == 'prod'
+    # if: ${{ github.ref_name == 'prod' }}
     runs-on: self-hosted
 
     steps:
@@ -56,9 +69,13 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script 3
         run: |
-          echo "rama: ${{ vars.GITHUB_REF_NAME }}"
-          echo "nombre: ${{ vars.ALUMNO }}"
-          echo "email: ${{ vars.EMAIL }}"
+          echo "Datos de Salida Job 1:"
+          echo "rama: ${{ github.ref_name }}"
+          echo ${{ vars.ALUMNO }}
+          echo ${{ vars.ALUMNOS }}
+          echo $vars.ALUMNO
+          echo $vars.ALUMNOS
+
 
   # hacer curl a la URL e imprimir el resultado junto con el nombre de la rama
   job-2:
@@ -71,7 +88,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script 4
         run: |
-          echo "rama: ${{ vars.GITHUB_REF_NAME }}"
-          curl ${{ secrets.URL }}
+          echo "Datos de Salida Job 2:"
+          echo "rama: ${{ github.ref_name }}"
+          curl $secrets.URL
 
 
