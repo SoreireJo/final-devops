@@ -29,7 +29,7 @@ jobs:
       - name: Run a multi-line script for dev branch
         run: |
           echo "rama: $env_var"
-          echo "nombre: ${{ vars.NOMBRE }}"
+          echo "nombre: ${{ vars.ALUMNO }}"
 
   # imprimir email y rama si la rama es qa
   job-qa:
@@ -59,7 +59,7 @@ jobs:
       - name: Run a multi-line script for prod branch
         run: |
           echo "rama: $env_var"
-          echo "nombre: ${{ vars.NOMBRE }}"
+          echo "nombre: ${{ vars.ALUMNO }}"
 	        echo "email: ${{ vars.EMAIL }}"
 
   # hacer curl a la URL e imprimir el resultado junto con el nombre de la rama
