@@ -1,4 +1,4 @@
-name: merge jobs
+name: merge job1 qa
 
 on:
   pull_request:
