@@ -6,7 +6,7 @@ async function run() {
     const product = await products.findOne(query); // Noncompliant
 }
 run().catch(console.dir);
-/* change nothing */
+/* change nothing 1 */
 
 import {aws_apigateway as apigateway} from "aws-cdk-lib"
 
