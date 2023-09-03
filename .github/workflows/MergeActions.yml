@@ -71,10 +71,8 @@ jobs:
 
   # imprimir nombre y rama si la rama es prod
   job-1-prod:
-    if: |
-      (github.event.pull_request.merged == true) &&
-      ${{ github.ref_name == 'prod' }}
-      
+    if: ${{ github.ref_name == 'prod' }} && github.event.pull_request.merged == true
+          
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
