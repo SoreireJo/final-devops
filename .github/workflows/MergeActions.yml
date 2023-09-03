@@ -21,7 +21,7 @@ jobs:
   job-1-dev:
     if: |
       github.ref_name == 'dev' &&
-      (true)
+      (github.event.pull_request.merged)
       
      
     runs-on: self-hosted
@@ -48,7 +48,7 @@ jobs:
   job-1-qa:
     if: |
       github.ref_name == 'qa' &&
-      (true)
+      (github.event.pull_request.mergede)
       
     runs-on: self-hosted
     steps:
@@ -74,7 +74,7 @@ jobs:
   job-1-prod:
     if: |
       github.ref_name == 'prod' &&
-      (true)
+      (github.event.pull_request.mergede)
       
           
     runs-on: self-hosted
