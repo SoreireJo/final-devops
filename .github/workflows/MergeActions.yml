@@ -46,7 +46,6 @@ jobs:
   # imprimir email y rama si la rama es qa
   job-1-qa:
     if: |
-      always() &&
       github.event.pull_request.merged == true &&
       github.ref_name == 'qa'
       
@@ -72,7 +71,9 @@ jobs:
 
   # imprimir nombre y rama si la rama es prod
   job-1-prod:
-    if: github.ref_name == 'prod'
+    if: |
+      github.event.pull_request.merged == true &&
+      github.ref_name == 'prod'
           
     runs-on: self-hosted
     steps:
