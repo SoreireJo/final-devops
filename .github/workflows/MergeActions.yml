@@ -67,7 +67,7 @@ jobs:
 
   # imprimir nombre y rama si la rama es prod
   job-prod:
-    if: ${{ github.ref_name == 'prod }}
+    if: ${{ github.ref_name == 'prod' }}
           
     runs-on: self-hosted
     steps:
