@@ -19,14 +19,14 @@ env:
 jobs:
   # imprimir nombre y rama si la rama es dev
   job-1-dev:
-    if: |
-      github.event.pull_request.merged == true &&
-      github.ref_name == 'dev'
+    if: github.ref_name == 'dev'
      
     runs-on: self-hosted
     steps:
+      - if: ithub.event.pull_request.merged == true
+      
       - uses: actions/checkout@v3
-
+      
       - name: Run a multi-line script
         run: |
           echo
@@ -45,12 +45,12 @@ jobs:
 
   # imprimir email y rama si la rama es qa
   job-1-qa:
-    if: |
-      github.event.pull_request.merged == true &&
-      github.ref_name == 'qa'
+    if: github.ref_name == 'qa'
       
     runs-on: self-hosted
     steps:
+      - if: ithub.event.pull_request.merged == true
+      
       - uses: actions/checkout@v3
 
       - name: Run a multi-line script
@@ -71,12 +71,12 @@ jobs:
 
   # imprimir nombre y rama si la rama es prod
   job-1-prod:
-    if: |
-      github.event.pull_request.merged == true &&
-      github.ref_name == 'prod'
+    if: github.ref_name == 'prod'
           
     runs-on: self-hosted
     steps:
+      - if: ithub.event.pull_request.merged == true
+      
       - uses: actions/checkout@v3
 
       - name: Run a multi-line script
