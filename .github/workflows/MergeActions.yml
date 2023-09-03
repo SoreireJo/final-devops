@@ -47,7 +47,7 @@ jobs:
 
   # imprimir email y rama si la rama es qa
   job-1-qa:
-    if: github.ref_name == 'qa'
+    if: ${{ github.ref_name == 'qa' }}
       
     runs-on: self-hosted
     steps:
