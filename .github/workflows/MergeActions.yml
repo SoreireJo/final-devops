@@ -18,12 +18,8 @@ env:
     
 jobs:
   # imprimir nombre y rama si la rama es dev
-  job-1-dev:
-    if: |
-      always() &&
-      github.ref_name == 'dev' &&
-      (github.event.pull_request.merged)
-      
+  job-dev:
+    if: ${{ github.ref_name == 'dev' }}
      
     runs-on: self-hosted
     steps:
@@ -46,7 +42,7 @@ jobs:
           echo "nombre: ${{ vars.ALUMNO }}"
 
   # imprimir email y rama si la rama es qa
-  job-1-qa:
+  job-qa:
     if: ${{ github.ref_name == 'qa' }}
       
     runs-on: self-hosted
@@ -70,12 +66,8 @@ jobs:
           echo "email: ${{ vars.EMAIL }}"
 
   # imprimir nombre y rama si la rama es prod
-  job-1-prod:
-    if: |
-      always() &&
-      github.ref_name == 'prod' &&
-      (github.event.pull_request.mergede)
-      
+  job-prod:
+    if: ${{ github.ref_name == 'prod }}
           
     runs-on: self-hosted
     steps:
@@ -100,7 +92,7 @@ jobs:
           echo "email: ${{ vars.EMAIL }}"
 
   # hacer curl a la URL e imprimir el resultado junto con el nombre de la rama
-  job-2:
+  job-curl:
     if: github.event.pull_request.merged == true
     runs-on: self-hosted
     env:
