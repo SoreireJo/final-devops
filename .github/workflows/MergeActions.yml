@@ -46,6 +46,7 @@ jobs:
     if: ${{ github.ref_name == 'qa' }}
       
     runs-on: self-hosted
+    needs: [job-curl]
     steps:
       - uses: actions/checkout@v3
 
