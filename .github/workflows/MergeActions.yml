@@ -17,11 +17,23 @@ env:
   VAR_DEBUG_vars: ${{ toJson(vars) }}
     
 jobs:
+  job-check:
+    if: github.event.pull_request.merged == true
+
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run a multi-line script
+        run:  echo
+    
   # imprimir nombre y rama si la rama es dev
   job-1-dev:
     if: |
       github.event.pull_request.merged == true &&
       github.ref_name == 'dev'
+      
       
     runs-on: self-hosted
     steps:
@@ -71,7 +83,9 @@ jobs:
 
   # imprimir nombre y rama si la rama es prod
   job-1-prod:
-    if: github.ref_name == 'prod' && github.event.pull_request.merged == true
+    if: github.ref_name == 'prod'
+    
+    needs: job-check
           
     runs-on: self-hosted
     steps:
