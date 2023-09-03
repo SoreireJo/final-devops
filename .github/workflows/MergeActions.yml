@@ -46,6 +46,7 @@ jobs:
   # imprimir email y rama si la rama es qa
   job-1-qa:
     if: |
+      always() &&
       github.event.pull_request.merged == true &&
       github.ref_name == 'qa'
       
