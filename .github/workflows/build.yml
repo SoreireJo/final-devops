@@ -1,14 +1,17 @@
-name: Build_SonarCloud
+name: scan with sonarcloud
 on:
-  push:
+  pull_request:
     branches:
       - main
-  pull_request:
+      - dev
+      - qa
+      - prod
     types: [opened, synchronize, reopened]
+    
 jobs:
   sonarcloud:
     name: SonarCloud
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
         with:
