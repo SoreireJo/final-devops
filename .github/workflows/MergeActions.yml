@@ -25,7 +25,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo
-          echo: Tarea: imprimir nombre y rama si la rama es dev
+          echo "Tarea: imprimir nombre y rama si la rama es dev"
           echo "----------------------------"
           echo "Datos de Salida Job: $GITHUB_JOB"
           echo "----------------------------"
@@ -48,7 +48,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo
-          echo: Tarea: imprimir email y rama si la rama es qa
+          echo "Tarea: imprimir email y rama si la rama es qa"
           echo "----------------------------"
           echo "Datos de Salida Job: $GITHUB_JOB"
           echo "----------------------------"
@@ -71,7 +71,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo
-          echo: Tarea: imprimir nombre y rama si la rama es prod
+          echo "Tarea: imprimir nombre y rama si la rama es prod"
           echo "----------------------------"
           echo "Datos de Salida Job: $GITHUB_JOB"
           echo "----------------------------"
@@ -98,7 +98,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo
-          echo: Tarea: hacer curl a la URL e imprimir el resultado junto con el nombre de la rama
+          echo "Tarea: hacer curl a la URL e imprimir el resultado junto con el nombre de la rama"
           echo "----------------------------"
           echo "Datos de Salida Job: $GITHUB_JOB"
           echo "----------------------------"
