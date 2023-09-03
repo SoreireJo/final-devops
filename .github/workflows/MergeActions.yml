@@ -20,6 +20,7 @@ jobs:
   # imprimir nombre y rama si la rama es dev
   job-1-dev:
     if: |
+      always() &&
       ${{ github.ref_name == 'dev' }} &&
       github.event.pull_request.merged == true
     runs-on: self-hosted
@@ -45,6 +46,7 @@ jobs:
   # imprimir email y rama si la rama es qa
   job-1-qa:
     if: |
+      always() &&
       ${{ github.ref_name == 'qa' }} &&
       github.event.pull_request.merged == true
     runs-on: self-hosted
@@ -70,6 +72,7 @@ jobs:
   # imprimir nombre y rama si la rama es prod
   job-1-prod:
     if: |
+      always() &&
       ${{ github.ref_name == 'prod' }} &&
       github.event.pull_request.merged == true
     runs-on: self-hosted
