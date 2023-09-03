@@ -49,8 +49,7 @@ jobs:
   job-1-qa:
     if: |
       always() &&
-      github.ref_name == 'qa' &&
-      (github.event.pull_request.mergede)
+      github.ref_name == 'qa'
       
     runs-on: self-hosted
     steps:
