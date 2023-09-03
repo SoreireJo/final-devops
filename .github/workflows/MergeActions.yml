@@ -46,7 +46,6 @@ jobs:
     if: ${{ github.ref_name == 'qa' }}
       
     runs-on: self-hosted
-    needs: [job-curl]
     steps:
       - uses: actions/checkout@v3
 
@@ -92,24 +91,3 @@ jobs:
           echo "nombre: ${{ vars.ALUMNO }}"
           echo "email: ${{ vars.EMAIL }}"
 
-  # hacer curl a la URL e imprimir el resultado junto con el nombre de la rama
-  job-curl:
-    if: github.event.pull_request.merged == true
-    runs-on: self-hosted
-    env:
-      SECRET_URL: ${{ secrets.URL_REPO }} 
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Run a multi-line script
-        run: |
-          echo
-          echo "Tarea: hacer curl a la URL e imprimir el resultado junto con el nombre de la rama"
-          echo "-------------------------------"
-          echo "Datos de Salida Job: $GITHUB_JOB"
-          echo "-------------------------------"
-          echo "rama: $VAR_BRANCH"
-          echo "-------------------------------"
-          echo "curl Secret URL:"
-          curl "$SECRET_URL"
