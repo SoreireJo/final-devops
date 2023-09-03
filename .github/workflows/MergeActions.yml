@@ -15,17 +15,17 @@ env:
     
 jobs:
   # imprimir nombre y rama si la rama es dev
-  job-dev:
+  job-1-dev:
     if: ${{ github.ref_name == 'dev' }}
 
     runs-on: self-hosted
-
     steps:
       - uses: actions/checkout@v3
 
       - name: Run a multi-line script
         run: |
           echo
+          echo: Tarea: imprimir nombre y rama si la rama es dev
           echo "----------------------------"
           echo "Datos de Salida Job: $GITHUB_JOB"
           echo "----------------------------"
@@ -39,16 +39,16 @@ jobs:
           echo "nombre: ${{ vars.ALUMNO }}"
 
   # imprimir email y rama si la rama es qa
-  job-qa:
-    # if: ${{ github.ref_name == 'qa' }}
+  job-1-qa:
+    if: ${{ github.ref_name == 'qa' }}
     runs-on: self-hosted
-
     steps:
       - uses: actions/checkout@v3
 
       - name: Run a multi-line script
         run: |
           echo
+          echo: Tarea: imprimir email y rama si la rama es qa
           echo "----------------------------"
           echo "Datos de Salida Job: $GITHUB_JOB"
           echo "----------------------------"
@@ -62,18 +62,16 @@ jobs:
           echo "email: ${{ vars.EMAIL }}"
 
   # imprimir nombre y rama si la rama es prod
-  job-prod:
-    # if: ${{ github.ref_name == 'prod' }}
+  job-1-prod:
+    if: ${{ github.ref_name == 'prod' }}
     runs-on: self-hosted
-
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           echo
+          echo: Tarea: imprimir nombre y rama si la rama es prod
           echo "----------------------------"
           echo "Datos de Salida Job: $GITHUB_JOB"
           echo "----------------------------"
@@ -88,21 +86,19 @@ jobs:
           echo "nombre: ${{ vars.ALUMNO }}"
           echo "email: ${{ vars.EMAIL }}"
 
-
   # hacer curl a la URL e imprimir el resultado junto con el nombre de la rama
   job-2:
     runs-on: self-hosted
-
     env:
       SECRET_URL: ${{ secrets.URL_REPO }} 
 
     steps:
       - uses: actions/checkout@v3
 
-      # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           echo
+          echo: Tarea: hacer curl a la URL e imprimir el resultado junto con el nombre de la rama
           echo "----------------------------"
           echo "Datos de Salida Job: $GITHUB_JOB"
           echo "----------------------------"
