@@ -17,9 +17,6 @@ env:
   VAR_DEBUG_vars: ${{ toJson(vars) }}
   VAR_DEBUG_pr: ${{ toJson(github.event.pull_request) }}"
   VAR_DEBUG_ref: ${{ toJson(github.ref_name) }}"
-
-  # Desde acá setear mostrar DEGUG_INFO true/false
-  DEBUG_INFO: true
     
 jobs:
   # imprimir nombre y rama si la rama es dev
@@ -98,7 +95,7 @@ jobs:
           echo "email: ${{ vars.EMAIL }}"
 
   debug:
-    if: ${{ DEBUG_INFO }}
+    if: true
           
     runs-on: self-hosted
     steps:
