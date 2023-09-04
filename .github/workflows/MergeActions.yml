@@ -14,6 +14,8 @@ on:
 env:
   VAR_BRANCH: ${{ github.ref_name }} 
   VAR_DEBUG_vars: ${{ toJson(vars) }}
+  VAR_DEBUG_pr: ${{ toJson(github.event.pull_request) }}"
+  VAR_DEBUG_ref: ${{ toJson(github.ref_name) }}"
     
 jobs:
   # imprimir nombre y rama si la rama es dev
@@ -36,6 +38,10 @@ jobs:
           echo "-------------------------------"
           echo "-        Debug vars...        -" 
           echo "vars: $VAR_DEBUG_vars"
+          echo "-        Debug pr...          -" 
+          echo "pr: $VAR_DEBUG_pr"
+          echo "-        Debug ref...         -" 
+          echo "ref: $VAR_DEBUG_ref"
           echo "-------------------------------"
           echo "-  Debug Enviroment vars...   -" 
           echo "nombre: ${{ vars.ALUMNO }}"
@@ -60,12 +66,17 @@ jobs:
           echo "-------------------------------"
           echo "-        Debug vars...        -" 
           echo "vars: $VAR_DEBUG_vars"
+          echo "-        Debug pr...          -" 
+          echo "pr: $VAR_DEBUG_pr"
+          echo "-        Debug ref...         -" 
+          echo "ref: $VAR_DEBUG_ref"
           echo "-------------------------------"
           echo "-  Debug Enviroment vars...   -" 
           echo "email: ${{ vars.EMAIL }}"
           echo "-------------------------------"
           echo "-------------------------------"
           echo "git.e.pr.merged: ${{ github.event.pull_request.merged }}"
+          echo "git.e.pr.head.ref: ${{ github.event.pull_request.head.ref }}"
           echo "git.ref_name: ${{ github.ref_name }}"
 
   # imprimir nombre y rama si la rama es prod
