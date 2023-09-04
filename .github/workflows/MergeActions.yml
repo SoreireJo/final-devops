@@ -7,7 +7,9 @@ on:
       - dev
       - qa
       - prod
-    types: [opened, synchronize, reopened]
+    # types: [opened, synchronize, reopened]
+    types:
+      - closed
 
   workflow_dispatch:
 
@@ -16,7 +18,6 @@ env:
   VAR_BRANCH: ${{ github.event.pull_request.head.ref }} 
   VAR_DEBUG_vars: ${{ toJson(vars) }}
   VAR_DEBUG_pr: ${{ toJson(github.event.pull_request) }}"
-  VAR_DEBUG_ref: ${{ toJson(github.ref_name) }}"
     
 jobs:
   # imprimir nombre y rama si la rama es dev
@@ -117,11 +118,6 @@ jobs:
           echo "-------------------------------"
           echo "-        Debug PR...          -" 
           echo "pr: $VAR_DEBUG_pr"
-          echo "-------------------------------"
-          echo "-------------------------------"
-          echo "-------------------------------"
-          echo "-        Debug ref...         -" 
-          echo "ref: $VAR_DEBUG_ref"
           echo "-------------------------------"
           echo "-------------------------------"
           echo "-------------------------------"
