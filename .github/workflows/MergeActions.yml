@@ -48,7 +48,7 @@ jobs:
 
   # imprimir email y rama si la rama es qa
   job-qa:
-    if: VAR_BRANCH == 'qa'
+    if: $VAR_BRANCH == 'qa'
       
     runs-on: self-hosted
     steps:
@@ -98,7 +98,7 @@ jobs:
           echo "email: ${{ vars.EMAIL }}"
 
   debug:
-    if: DEBUG_INFO
+    if: $DEBUG_INFO
           
     runs-on: self-hosted
     steps:
