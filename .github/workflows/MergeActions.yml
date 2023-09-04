@@ -42,7 +42,7 @@ jobs:
 
   # imprimir email y rama si la rama es qa
   job-qa:
-    if: ${{ github.ref_name == 'qa' }}
+    #if: ${{ github.ref_name == 'qa' }}
       
     runs-on: self-hosted
     steps:
@@ -63,6 +63,10 @@ jobs:
           echo "-------------------------------"
           echo "-  Debug Enviroment vars...   -" 
           echo "email: ${{ vars.EMAIL }}"
+          echo "-------------------------------"
+          echo "-------------------------------"
+          echo "git.e.pr.merged: ${{ github.event.pull_request.merged }}"
+          echo "git.ref_name: ${{ github.ref_name }}"
 
   # imprimir nombre y rama si la rama es prod
   job-prod:
