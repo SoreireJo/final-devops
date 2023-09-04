@@ -7,19 +7,22 @@ on:
       - dev
       - qa
       - prod
+    # types: [opened, synchronize, reopened]
     types:
       - closed
 
   workflow_dispatch:
 
 env:
-  VAR_BRANCH: ${{ github.ref_name }} 
+  # VAR_BRANCH: ${{ github.ref_name }} // NO ANDA BIEN CON LAS PR
+  VAR_BRANCH: ${{ github.event.pull_request.head.ref }} 
   VAR_DEBUG_vars: ${{ toJson(vars) }}
+  VAR_DEBUG_pr: ${{ toJson(github.event.pull_request) }}"
     
 jobs:
   # imprimir nombre y rama si la rama es dev
   job-dev:
-    if: ${{ github.ref_name == 'dev' }}
+    if: ${{ github.event.pull_request.head.ref == 'dev' }}
      
     runs-on: self-hosted
     steps:
@@ -43,7 +46,7 @@ jobs:
 
   # imprimir email y rama si la rama es qa
   job-qa:
-    if: ${{ github.ref_name == 'qa' }}
+    if: ${{ github.event.pull_request.head.ref == 'qa' }}
       
     runs-on: self-hosted
     steps:
@@ -64,10 +67,11 @@ jobs:
           echo "-------------------------------"
           echo "-  Debug Enviroment vars...   -" 
           echo "email: ${{ vars.EMAIL }}"
+          
 
   # imprimir nombre y rama si la rama es prod
   job-prod:
-    if: ${{ github.ref_name == 'prod' }}
+    if: ${{ github.event.pull_request.head.ref == 'prod' }}
           
     runs-on: self-hosted
     steps:
@@ -91,3 +95,33 @@ jobs:
           echo "nombre: ${{ vars.ALUMNO }}"
           echo "email: ${{ vars.EMAIL }}"
 
+  debug:
+    if: true
+          
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run a multi-line script
+        run: |
+          echo
+          echo "Tarea: Mostrar Mas Info útil para debug..."
+          echo "-------------------------------"
+          echo "-        Debug vars...        -" 
+          echo "vars: $VAR_DEBUG_vars"
+          echo "-------------------------------"
+          echo "-  Debug Enviroment vars...   -" 
+          echo "nombre: ${{ vars.ALUMNO }}"
+          echo "email: ${{ vars.EMAIL }}"
+          echo "-------------------------------"
+          echo "-------------------------------"
+          echo "-------------------------------"
+          echo "-        Debug PR...          -" 
+          echo "pr: $VAR_DEBUG_pr"
+          echo "-------------------------------"
+          echo "-------------------------------"
+          echo "-------------------------------"
+          echo "-  Debug referencias branch   -" 
+          echo "git.e.pr.merged: ${{ github.event.pull_request.merged }}"
+          echo "git.e.pr.head.ref: ${{ github.event.pull_request.head.ref }}"
+          echo "git.ref_name: ${{ github.ref_name }}"
